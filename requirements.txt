@@ -1,0 +1,7 @@
+ultralytics
+opencv-python
+numpy
+streamlit
+pillow
+prometheus_client
+torch --index-url https://download.pytorch.org/whl/cpu

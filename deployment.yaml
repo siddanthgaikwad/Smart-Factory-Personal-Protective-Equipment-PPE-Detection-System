@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ppe-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ppe-app
+  template:
+    metadata:
+      labels:
+        app: ppe-app
+    spec:
+      containers:
+      - name: ppe-app
+        image: ppe-app
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8501
+        - containerPort: 8000
