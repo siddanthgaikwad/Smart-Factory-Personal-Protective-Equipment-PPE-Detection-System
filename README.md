@@ -284,4 +284,4 @@ GitHub: https://github.com/siddanthgaikwad
 
 ## 📄 License
 
-This project is licensed under the MIT License. You are free to use, modify, and distribute it under the terms of the license.
+You are free to use, modify, and distribute this project for educational and learning purposes.
