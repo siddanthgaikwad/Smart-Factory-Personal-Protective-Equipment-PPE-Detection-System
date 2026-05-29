@@ -1,74 +1,82 @@
 # 🏭 Smart Factory PPE Detection System
 
-An AI-powered Personal Protective Equipment (PPE) detection system built using **YOLOv8**, designed to improve workplace safety in smart factory environments. The application automatically detects PPE compliance, identifies safety violations, provides a web dashboard for monitoring, and exposes metrics for observability using Prometheus and Grafana.
+A Personal Protective Equipment (PPE) detection system built using **YOLOv8**. The project detects workplace safety violations from images, videos, and live webcam feeds by identifying whether workers are wearing required safety equipment such as helmets and safety vests.
+
+🔗 Repository: https://github.com/siddanthgaikwad/Smart-Factory-Personal-Protective-Equipment-PPE-Detection-System
 
 ---
 
 ## 📌 Overview
 
-Industrial environments require strict adherence to safety regulations. This project leverages **Computer Vision** and **Deep Learning** to detect whether workers are wearing required PPE such as hard hats, safety vests, and masks.
+Workplace safety is a critical part of industrial operations. This project uses computer vision and deep learning to automatically detect PPE compliance and highlight safety violations in real time.
 
 The system supports:
 
-* Image-based PPE detection
-* Video-based PPE detection
-* Real-time webcam monitoring
-* Violation logging
-* Streamlit-based dashboard
-* Prometheus metrics integration
-* Docker and Kubernetes deployment
+* 🖼️ Image-based detection
+* 🎥 Video analysis
+* 📷 Live webcam monitoring
+* 📝 Violation logging
+* 📊 Streamlit dashboard
+* 📈 Prometheus monitoring
+* 🐳 Docker deployment
+* ☸️ Kubernetes deployment
 
 ---
 
-## 🚀 Features
+## ✨ Features
 
 ### 🔍 PPE Detection
 
-* Detects safety equipment using **YOLOv8**
-* Identifies:
+* Detects workers using YOLOv8
+* Identifies missing safety equipment
+* Highlights PPE violations in real time
+* Generates annotated output images and videos
 
-  * Hard Hats
-  * Safety Vests
-  * Face Masks
-  * Other PPE categories supported by the trained model
+### 🎥 Multiple Input Sources
 
-### 🎥 Multiple Detection Modes
+* Image files
+* Video files
+* Live webcam feed
 
-* Image Processing
-* Video Analysis
-* Real-time Webcam Monitoring
+### 📊 Dashboard Support
 
-### 📊 Monitoring Dashboard
+* Upload images through Streamlit
+* View detection results instantly
+* Simple and interactive user interface
 
-* Upload images for instant PPE compliance checks
-* Visualize detection results
-* User-friendly Streamlit interface
+### 📈 Monitoring
 
-### 📈 Observability
-
-* Logs safety violations
+* Violation logging
 * Prometheus metrics endpoint
-* Grafana-ready monitoring support
+* Grafana integration support
 
-### ☁️ Deployment Ready
+### 🐳 Deployment Ready
 
 * Dockerized application
 * Kubernetes manifests included
-* Easy cloud deployment
 
 ---
 
-## 🛠️ Technology Stack
+## 📸 Detection Result
 
-| Component            | Technology           |
-| -------------------- | -------------------- |
-| Object Detection     | YOLOv8 (Ultralytics) |
-| Programming Language | Python 3.9+          |
-| Dashboard            | Streamlit            |
-| Monitoring           | Prometheus           |
-| Visualization        | Grafana              |
-| Containerization     | Docker               |
-| Orchestration        | Kubernetes           |
+![PPE Detection Result](screenshots/ppe-detection-result.jpg)
+
+Example output showing worker detection and PPE violation identification.
+
+---
+
+## 🛠️ Tech Stack
+
+| Component        | Technology           |
+| ---------------- | -------------------- |
+| Object Detection | YOLOv8 (Ultralytics) |
+| Language         | Python               |
+| Computer Vision  | OpenCV               |
+| Dashboard        | Streamlit            |
+| Monitoring       | Prometheus           |
+| Visualization    | Grafana              |
+| Containerization | Docker               |
+| Orchestration    | Kubernetes           |
 
 ---
 
@@ -78,26 +86,49 @@ The system supports:
 smart_factory_ppe/
 │
 ├── app/
+│   ├── __init__.py
 │   └── dashboard.py
 │
-├── utils/
-│   ├── detection.py
-│   └── logger.py
+├── configs/
+├── data/
+├── logs/
+│   └── log.csv
 │
 ├── models/
-├── configs/
+│
+├── outputs/
+│   ├── images/
+│   ├── reports/
+│   └── videos/
+│
+├── runs/
 │
 ├── sample_data/
 │   ├── images/
 │   └── videos/
 │
-├── outputs/
-│   └── images/
+├── screenshots/
 │
+├── utils/
+│   ├── __init__.py
+│   ├── detection.py
+│   ├── logger.py
+│   └── utils.py
+│
+├── .dockerignore
+├── .gitignore
+├── best.pt
+├── yolov8n.pt
+├── train.py
 ├── main.py
 ├── requirements.txt
 ├── Dockerfile
-└── *.yaml
+├── deployment.yaml
+├── service.yaml
+├── metrics-service.yaml
+├── prometheus.yaml
+├── grafana.yaml
+└── README.md
 ```
 
 ---
@@ -107,8 +138,9 @@ smart_factory_ppe/
 ### Clone Repository
 
 ```bash
-git clone <repository_url>
-cd smart_factory_ppe
+git clone https://github.com/siddanthgaikwad/Smart-Factory-Personal-Protective-Equipment-PPE-Detection-System.git
+
+cd Smart-Factory-Personal-Protective-Equipment-PPE-Detection-System
 ```
 
 ### Create Virtual Environment
@@ -137,95 +169,63 @@ pip install -r requirements.txt
 
 ---
 
-## ▶️ Running the Application
+## 🚀 Running the Project
 
-### 1. Image Detection
-
-Process all images inside a directory and save annotated results.
+### Image Detection
 
 ```bash
 python main.py --mode image --input sample_data/images
 ```
 
-Output images will be saved to:
+Output images are saved in:
 
 ```text
 outputs/images/
 ```
 
----
-
-### 2. Video Detection
-
-Run PPE detection on a video file.
+### Video Detection
 
 ```bash
 python main.py --mode video --input sample_data/videos/your_video.mp4
 ```
 
----
-
-### 3. Webcam Detection
-
-Run real-time PPE monitoring using your webcam.
+### Webcam Detection
 
 ```bash
 python main.py --mode webcam
 ```
 
-Press **Q** to exit.
+Press **Q** to exit the webcam window.
 
 ---
 
 ## 🌐 Streamlit Dashboard
 
-Launch the interactive dashboard:
+Run the dashboard:
 
 ```bash
 streamlit run app/dashboard.py
 ```
 
-Open:
+Default URL:
 
 ```text
 http://localhost:8501
 ```
 
-Features:
-
-* Upload images
-* Detect PPE compliance
-* View violation results instantly
+The dashboard allows users to upload images and check PPE compliance through a simple web interface.
 
 ---
 
-## 📊 Prometheus Monitoring
+## 📊 Prometheus Metrics
 
-The application automatically exposes metrics on:
+Metrics are exposed on:
 
 ```text
 http://localhost:8000
 ```
 
 These metrics can be scraped by Prometheus and visualized using Grafana dashboards.
-
----
-
-## 📁 Sample Data
-
-Add your testing files to:
-
-### Images
-
-```text
-sample_data/images/
-```
-
-### Videos
-
-```text
-sample_data/videos/
-```
 
 ---
 
@@ -247,7 +247,7 @@ docker run -p 8501:8501 -p 8000:8000 smart-factory-ppe
 
 ## ☸️ Kubernetes Deployment
 
-Apply Kubernetes manifests:
+Deploy the application:
 
 ```bash
 kubectl apply -f deployment.yaml
@@ -263,36 +263,25 @@ kubectl get services
 
 ---
 
-## 🔒 Safety Use Cases
+## 🎯 Use Cases
 
-* Manufacturing Plants
 * Smart Factories
+* Manufacturing Plants
 * Construction Sites
-* Warehouses
-* Industrial Facilities
+* Industrial Safety Monitoring
 * Compliance Auditing
+* Workplace Safety Automation
 
 ---
 
-## 📈 Future Enhancements
+## 👨‍💻 Author
 
-* Email/SMS violation alerts
-* Multi-camera support
-* Employee identification integration
-* Historical analytics dashboard
-* Cloud deployment support
-* Mobile application integration
+**Gaikwad Siddanth**
+
+GitHub: https://github.com/siddanthgaikwad
 
 ---
 
-## 👨💻 Author
-
-Developed as part of a Smart Factory Safety Monitoring solution using AI-powered computer vision.
-
----
-
-## 📜 License
+## 📄 License
 
 This project is licensed under the MIT License.
-
-Feel free to use, modify, and distribute this project for educational and research purposes.
